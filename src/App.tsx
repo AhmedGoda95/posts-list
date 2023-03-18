@@ -12,7 +12,7 @@ function App() {
           xs: 1,
           md: 0,
         },
-        paddingBlock: 3,
+        paddingBlock: 5,
       }}
     >
       <Grid item xs={12} md={10} lg={8} xl={6}>

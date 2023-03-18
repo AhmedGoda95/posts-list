@@ -1,22 +1,26 @@
-import { Typography, Box } from "@mui/material";
+import { Typography, Box, Avatar } from "@mui/material";
 import { FC } from "react";
 
 const Comment: FC<CommentProps> = ({ body, name }) => {
   return (
     <>
+      <Box sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
+        <Avatar sx={{ width: 40, height: 40, backgroundColor: "#24353F" }}>
+          A
+        </Avatar>
+        <Typography
+          sx={{
+            color: "#000",
+            fontSize: 16,
+            fontWeight: 500,
+            paddingInlineStart: 1,
+          }}
+          component="h2"
+        >
+          {name}
+        </Typography>
+      </Box>
       <Typography
-        sx={{
-          color: "#000",
-          marginBottom: 1,
-          fontSize: 18,
-          fontWeight: 500,
-          paddingInlineStart: 1,
-        }}
-        component="h2"
-      >
-        {name}
-      </Typography>
-      <Box
         sx={{
           backgroundColor: "#fff",
           padding: 1,
@@ -24,8 +28,8 @@ const Comment: FC<CommentProps> = ({ body, name }) => {
           color: "#00000080",
         }}
       >
-        <Typography>{body}</Typography>
-      </Box>
+        {body}
+      </Typography>
     </>
   );
 };

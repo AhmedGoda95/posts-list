@@ -30,7 +30,7 @@ const NotFound = () => {
         Page not found
       </Typography>
       <Button onClick={() => navigate("/")} variant="outlined">
-        Back to Posts
+        Back to Home
       </Button>
     </Box>
   );

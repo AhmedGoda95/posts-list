@@ -72,10 +72,10 @@ const ListPosts = () => {
             })}
           </Grid>
 
-          <Box sx={{ marginTop: 4, textAlign: "center" }}>
+          <Box sx={{ marginTop: 5, textAlign: "center" }}>
             <Button
               onClick={onLoadMore}
-              variant="outlined"
+              variant="contained"
               disabled={viewedPosts.length === fetchedPosts.length}
             >
               Load More

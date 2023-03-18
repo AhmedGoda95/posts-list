@@ -19,7 +19,7 @@ const PostComments: FC<PostCommentsProps> = ({ postId }) => {
   const handleAddComment = (comment: string) => {
     const addedCommentData = {
       postId,
-      id: 100,
+      id: 1,
       name: "Ahmed Goda",
       email: "ahmed@mail.com",
       body: comment,

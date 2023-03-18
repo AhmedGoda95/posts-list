@@ -1,5 +1,6 @@
 import { Box, Button, TextField } from "@mui/material";
 import { FC, useState } from "react";
+import InsertCommentOutlinedIcon from "@mui/icons-material/InsertCommentOutlined";
 
 const AddComment: FC<{ onAddComment: (...arg: any[]) => any }> = ({
   onAddComment,
@@ -50,7 +51,13 @@ const AddComment: FC<{ onAddComment: (...arg: any[]) => any }> = ({
         maxRows={4}
       />
       <Box sx={{ textAlign: "right", marginRight: 2 }}>
-        <Button onClick={handleOnClick} disabled={!enteredComment.trim()}>
+        <Button
+          variant="contained"
+          color="info"
+          onClick={handleOnClick}
+          disabled={!enteredComment.trim()}
+          startIcon={<InsertCommentOutlinedIcon />}
+        >
           Post Comment
         </Button>
       </Box>
