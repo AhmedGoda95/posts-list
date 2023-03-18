@@ -40,13 +40,39 @@ const PostDetails = () => {
       <Error error={error}>
         <EmptyData empty={fetchedPost === null}>
           <Grid container columnSpacing={2} rowSpacing={3}>
-            <Grid item xs={12} md={8}>
+            <Grid
+              item
+              xs={12}
+              md={8}
+              sx={{
+                order: {
+                  md: 0,
+                  xs: 1,
+                },
+              }}
+            >
               <PostData title={fetchedPost?.title} body={fetchedPost?.body} />
             </Grid>
-            <Grid item xs={12} md={4}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                order: {
+                  md: 1,
+                  xs: 0,
+                },
+              }}
+            >
               <UserCreator userId={fetchedPost?.userId} />
             </Grid>
-            <Grid item xs={12}>
+            <Grid
+              item
+              xs={12}
+              sx={{
+                order: 2,
+              }}
+            >
               <PostComments postId={postId!} />
             </Grid>
           </Grid>
