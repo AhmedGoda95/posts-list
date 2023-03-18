@@ -2,7 +2,7 @@ import { Box, Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import { API_ENDPOINT } from "../../../config";
+import { BASE_URL } from "../../../config";
 import UserCreator from "./UserCreator";
 import EmptyData from "../../../shared/ui/EmptyData";
 import PostComments from "./PostComments";
@@ -23,7 +23,7 @@ const PostDetails = () => {
     (async function () {
       setLoading(true);
       try {
-        const response = await fetch(`${API_ENDPOINT}posts/${postId}`);
+        const response = await fetch(`${BASE_URL}posts/${postId}`);
         const data = await response.json();
         setFetchedPost(data);
         setLoading(false);

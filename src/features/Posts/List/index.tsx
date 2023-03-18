@@ -2,7 +2,7 @@ import { Box, Button, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-import { API_ENDPOINT } from "../../../config";
+import { BASE_URL } from "../../../config";
 import EmptyData from "../../../shared/ui/EmptyData";
 import Error from "../../../shared/ui/Error";
 import SpinnerLoader from "../../../shared/ui/SpinnerLoader";
@@ -12,12 +12,24 @@ import SearchBox from "./SearchBox";
 const LIMIT = 20;
 
 const ListPosts = () => {
-  const [fetchedPosts, setFetchedPosts] = useState<Record<string, any>[]>([]);
-  const [viewedPosts, setViewedPosts] = useState<Record<string, any>[]>([]);
+  const [fetchedPosts, setFetchedPosts] = useState<Record<string, any>[]>([]); // hold all posts (100 record)
+  const [paginatedPosts, setPaginatedPosts] = useState<Record<string, any>[]>(
+    []
+  ); // hold paginated posts 20 by 20
+  const [viewedPosts, setViewedPosts] = useState<Record<string, any>[]>([]); // hold viewed posts on the screen
+  const [searchedValue, setSearchedValue] = useState("");
+
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const handleChangeSearch = () => {
+    const clonedPosts = structuredClone(paginatedPosts);
+    setViewedPosts(() =>
+      clonedPosts.filter((post: any) => post.title.includes(searchedValue))
+    );
+  };
 
   const onLoadMore = () => {
     const loadedPosts = fetchedPosts.slice(
@@ -25,6 +37,7 @@ const ListPosts = () => {
       viewedPosts.length + LIMIT
     );
     setViewedPosts((prevPosts) => [...prevPosts, ...loadedPosts]);
+    setPaginatedPosts((prevPosts) => [...prevPosts, ...loadedPosts]);
     const pageNumber = Math.ceil(
       (loadedPosts.length + viewedPosts.length) / 20
     );
@@ -39,11 +52,12 @@ const ListPosts = () => {
       setLoading(true);
       try {
         const url = userId ? `posts?userId=${userId}` : "posts";
-        const response = await fetch(`${API_ENDPOINT}${url}`);
+        const response = await fetch(`${BASE_URL}${url}`);
         const data = await response.json();
         if (data.length) {
           setFetchedPosts(data);
           setViewedPosts(data.slice(0, LIMIT * +pageNumber));
+          setPaginatedPosts(data.slice(0, LIMIT * +pageNumber));
           searchParams.set("limit", `${LIMIT}`);
           searchParams.set("page", `${pageNumber}`);
           setSearchParams(searchParams);
@@ -57,11 +71,15 @@ const ListPosts = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    handleChangeSearch();
+  }, [searchedValue]);
+
   return (
     <SpinnerLoader loading={loading}>
       <Error error={error}>
-        <EmptyData empty={fetchedPosts.length === 0}>
-          <SearchBox />
+        <SearchBox onSearch={setSearchedValue} />
+        <EmptyData empty={viewedPosts.length === 0}>
           <Grid container columnSpacing={2} rowSpacing={2}>
             {viewedPosts.map((post: any) => {
               return (

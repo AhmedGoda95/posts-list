@@ -22,10 +22,10 @@ const NotFound = () => {
       </Typography>
       <Typography
         component="h3"
-        sx={({ spacing }) => ({
+        sx={{
           fontSize: 24,
-          marginBottom: spacing(3),
-        })}
+          marginBottom: 3,
+        }}
       >
         Page not found
       </Typography>

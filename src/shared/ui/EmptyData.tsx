@@ -15,13 +15,14 @@ const EmptyData: FC<EmptyDataProps> = ({ children, empty }) => {
         }}
       >
         <Typography
-          sx={({ spacing }) => ({
+          sx={{
             textAlign: "center",
+            color: "#fff",
             fontSize: {
-              xs: spacing(2),
-              md: spacing(2.5),
+              xs: 16,
+              md: 22,
             },
-          })}
+          }}
         >
           No Data Found
         </Typography>

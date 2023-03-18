@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 
-import { API_ENDPOINT } from "../../../config";
+import { BASE_URL } from "../../../config";
 import Comment from "./component/Comment";
 import EmptyData from "../../../shared/ui/EmptyData";
 import AddComment from "./component/AddComment";
@@ -27,13 +27,11 @@ const PostComments: FC<PostCommentsProps> = ({ postId }) => {
     setFetchedComments((prevState) => [addedCommentData, ...prevState]);
   };
 
-  console.log({ fetchedComments });
-
   useEffect(() => {
     (async function () {
       setLoading(true);
       try {
-        const response = await fetch(`${API_ENDPOINT}posts/${postId}/comments`);
+        const response = await fetch(`${BASE_URL}posts/${postId}/comments`);
         const data = await response.json();
         setFetchedComments(data);
         setLoading(false);

@@ -1,12 +1,23 @@
-import { Box, TextField } from "@mui/material";
+import { Box, OutlinedInput, TextField } from "@mui/material";
+import { FC, memo, useState } from "react";
 
-const SearchBox = () => {
+const SearchBox: FC<{ onSearch: (...arg: any[]) => any }> = ({ onSearch }) => {
+  const [value, setValue] = useState("");
+
+  const handleOnKeyDown = (e: any) => {
+    if (e.key === "Enter" || e.key === "NumpadEnter") {
+      onSearch(value);
+    }
+  };
+
   return (
     <Box sx={{ marginBottom: 3 }}>
-      <TextField
+      <OutlinedInput
         placeholder="Search..."
         size="small"
-        variant="outlined"
+        onKeyDown={handleOnKeyDown}
+        onChange={(e) => setValue(e.target.value)}
+        value={value}
         sx={{
           backgroundColor: "#fff",
           minWidth: {
@@ -19,4 +30,4 @@ const SearchBox = () => {
   );
 };
 
-export default SearchBox;
+export default memo(SearchBox);

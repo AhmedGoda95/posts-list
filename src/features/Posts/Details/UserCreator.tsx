@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 
 import ShowText from "./component/ShowText";
-import { API_ENDPOINT } from "../../../config";
+import { BASE_URL } from "../../../config";
 import { Link } from "react-router-dom";
 import SpinnerLoader from "../../../shared/ui/SpinnerLoader";
 import EmptyData from "../../../shared/ui/EmptyData";
@@ -20,7 +20,7 @@ const UserCreator: FC<UserCreatorProps> = ({ userId }) => {
     (async function () {
       setLoading(true);
       try {
-        const response = await fetch(`${API_ENDPOINT}users/${userId}`);
+        const response = await fetch(`${BASE_URL}users/${userId}`);
         const data = await response.json();
         setFetchedUser(data);
         setLoading(false);
