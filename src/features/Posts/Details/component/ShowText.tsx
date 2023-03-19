@@ -11,11 +11,12 @@ const ShowText: FC<ShowTextProps> = ({ title, value }) => {
         marginBottom: 1,
       }}
     >
-      <Typography sx={{ fontWeight: 500 }}>{title}:</Typography>
+      <Typography sx={{ fontWeight: 600 }}>{title}:</Typography>
       <Typography
         sx={{
           color: "#00000080",
           marginInlineStart: 0.5,
+          fontWeight: 500,
         }}
       >
         {value}

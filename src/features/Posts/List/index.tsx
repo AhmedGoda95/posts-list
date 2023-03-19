@@ -24,13 +24,6 @@ const ListPosts = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleChangeSearch = () => {
-    const clonedPosts = structuredClone(paginatedPosts);
-    setViewedPosts(() =>
-      clonedPosts.filter((post: any) => post.title.includes(searchedValue))
-    );
-  };
-
   const onLoadMore = () => {
     const loadedPosts = fetchedPosts.slice(
       viewedPosts.length,
@@ -72,7 +65,16 @@ const ListPosts = () => {
   }, []);
 
   useEffect(() => {
-    handleChangeSearch();
+    const clonedPosts = structuredClone(paginatedPosts);
+    if (searchedValue.trim()) {
+      setViewedPosts(() =>
+        clonedPosts.filter((post: any) =>
+          post.title.includes(searchedValue.trim())
+        )
+      );
+    } else {
+      setViewedPosts(clonedPosts);
+    }
   }, [searchedValue]);
 
   return (
