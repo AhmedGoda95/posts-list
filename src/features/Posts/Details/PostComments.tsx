@@ -51,30 +51,32 @@ const PostComments: FC<PostCommentsProps> = ({ postId }) => {
       >
         Comments
       </Typography>
-      <SpinnerLoader loading={loading}>
-        <Error error={error}>
-          <EmptyData empty={fetchedComments.length === 0}>
-            <Box
-              sx={{
-                padding: 2,
-                backgroundColor: "#f7f7f7",
-                borderRadius: 1,
-                maxHeight: "70vh",
-                overflow: "auto",
-              }}
-            >
-              {fetchedComments.map((comment: any) => {
-                return (
-                  <Box sx={{ marginBottom: 1.5 }} key={comment.id}>
-                    <Comment name={comment.name} body={comment.body} />
-                  </Box>
-                );
-              })}
-            </Box>
-            <AddComment onAddComment={handleAddComment} />
-          </EmptyData>
-        </Error>
-      </SpinnerLoader>
+      <Box
+        sx={{
+          padding: 2,
+          backgroundColor: "#f7f7f7",
+          borderRadius: 1,
+          maxHeight: "70vh",
+          overflow: "auto",
+        }}
+      >
+        <SpinnerLoader loading={loading}>
+          <Error error={error}>
+            <EmptyData empty={fetchedComments.length === 0} color="#202020">
+              <>
+                {fetchedComments.map((comment: any) => {
+                  return (
+                    <Box sx={{ marginBottom: 1.5 }} key={comment.id}>
+                      <Comment name={comment.name} body={comment.body} />
+                    </Box>
+                  );
+                })}
+              </>
+              <AddComment onAddComment={handleAddComment} />
+            </EmptyData>
+          </Error>
+        </SpinnerLoader>
+      </Box>
     </>
   );
 };

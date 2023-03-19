@@ -2,7 +2,7 @@ import { FC, ReactElement } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-const EmptyData: FC<EmptyDataProps> = ({ children, empty }) => {
+const EmptyData: FC<EmptyDataProps> = ({ children, empty, color = "#fff" }) => {
   if (empty)
     return (
       <Box
@@ -11,13 +11,13 @@ const EmptyData: FC<EmptyDataProps> = ({ children, empty }) => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          minHeight: 200,
+          minHeight: 100,
         }}
       >
         <Typography
           sx={{
             textAlign: "center",
-            color: "#fff",
+            color,
             fontSize: {
               xs: 16,
               md: 22,
@@ -35,6 +35,7 @@ const EmptyData: FC<EmptyDataProps> = ({ children, empty }) => {
 interface EmptyDataProps {
   children: ReactElement | ReactElement[];
   empty: boolean;
+  color?: string;
 }
 
 export default EmptyData;

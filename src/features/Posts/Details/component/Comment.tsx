@@ -6,7 +6,7 @@ const Comment: FC<CommentProps> = ({ body, name }) => {
     <>
       <Box sx={{ display: "flex", alignItems: "center", marginBottom: 2 }}>
         <Avatar sx={{ width: 40, height: 40, backgroundColor: "#24353F" }}>
-          A
+          {name[0].toUpperCase()}
         </Avatar>
         <Typography
           sx={{
